@@ -26,3 +26,4 @@ def remove_category(category_id):
     delete_category(category_id)
 
     return '', 204
+
