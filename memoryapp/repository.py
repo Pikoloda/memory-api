@@ -70,3 +70,16 @@ def __next_card_id():
     global id_cards
     id_cards += 1
     return id_cards
+
+def delete_card(category_id, card_id):
+    categories_results = [category for category in categories_list if category.category_id == category_id]
+
+    if not categories_results:
+        raise NotFoundException('Category')
+
+    card_results = [card for card in cards_list if card.category_id == category_id and card.card_id == card_id]
+
+    if card_results:
+        cards_list[:] = [card for card in cards_list if card.category_id != category_id or card.card_id != card_id]
+    else:
+        raise NotFoundException('Card')
