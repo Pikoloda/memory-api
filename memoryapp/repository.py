@@ -54,3 +54,19 @@ def get_cards(category_id):
     cards_results = [card for card in cards_list if card.category_id == category_id]
 
     return cards_results
+
+def create_card(category_id, word, translation):
+    categories_results = [category for category in categories_list if category.category_id == category_id]
+
+    if not categories_results:
+        raise NotFoundException('Category')
+
+    card = Card(__next_card_id(),category_id, word, translation)
+    cards_list.append(card)
+
+    return card
+
+def __next_card_id():
+    global id_cards
+    id_cards += 1
+    return id_cards
